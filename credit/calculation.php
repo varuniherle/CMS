@@ -5,8 +5,11 @@ $amt = $_POST["amt"];
 
 include 'connection.php';
 $q1 = mysqli_query($conn,"select balance from users where Name = '$from_user';");
+$q2 = mysqli_query($conn,"select balance from users where Name = '$to_user';");
 $ex1 = mysqli_fetch_array($q1);
+$ex2 = mysqli_fetch_array($q2);
 $amt1 = $ex1['balance'];
+$amt2 = $ex2['balance'];
 
 if($from_user==$to_user)
 {
@@ -27,8 +30,9 @@ else{
 
 	else
 	{	
+
 		$ba = $amt1 - $amt;
-		$aa = $amt1 + $amt;
+		$aa = $amt2 + $amt;
 		$s1 = "update users set balance = $ba WHERE Name = '$from_user'";
 		$s2 = "update users set balance = $aa WHERE Name = '$to_user'";
 		$q3 = mysqli_query($conn,$s2);
